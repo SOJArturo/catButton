@@ -12,32 +12,34 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
-    //
+    // Grabs the click event on $cat-button and runs whatever is inside the callback function
     $("#cat-button").on("click", function() {
 
-      //
+      // Assigning the api url to a variable for ease of use later on
       var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=lLqZNV1iZlBWITkpEG9sXi9BPGHaHJds&tag=cats";
 
-      //
+      // Uses AJAX to make the GET API call
       $.ajax({
         url: queryURL,
         method: "GET"
       })
 
-      //
+      // using .then to "resolve the API promise" and get the object
         .then(function(response) {
 
-        //
+        // getting the gif url out of the response
           var imageUrl = response.data.image_original_url;
 
-          //
+          // creating a new image element
           var catImage = $("<img>");
 
-          //
+          // adding the source attribute with the response value, and adding an alt attribute 
+          // to the image
           catImage.attr("src", imageUrl);
           catImage.attr("alt", "cat image");
 
-          //
+          // adding the new image element to the #images div
+          // so that the image appears in the DOM
           $("#images").prepend(catImage);
         });
     });
